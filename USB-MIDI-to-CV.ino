@@ -62,7 +62,7 @@ int notes[NOTES_BUFFER];
 int noteNeeded=0;
 float currentNote=0;
 byte analogVal = 0;
-float glide=0;
+float glide=0.005;
 int mod=0;
 float currentMod=0;
 int bend=0;
