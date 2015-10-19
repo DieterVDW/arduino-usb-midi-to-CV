@@ -1,4 +1,7 @@
 // littleBits MIDI Monosynth - by Nick Shaver
+// http://littlebits.cc/projects/arduino-midi-synth-with-lfo-portamento-and-pitch-wheel
+//
+// Improved by Dieter van de Walle
 //
 // Requires Ralf Kistner's arcore from https://github.com/rkistner/arcore
 // and Arduino software 1.5.4 or higher (currently beta or nightly versions) from 
@@ -69,7 +72,7 @@ void loop() {
       MIDIEvent e;
       e = MIDIUSB.read();
    
-      if(e.type == NOTEON) {
+      if(e.type == NOTEON && e.m3 > 0) {
         if(e.m1 == (0x90 + MIDI_CHANNEL)){
           if (e.m2==23){
             // set midi channel to 2
@@ -91,10 +94,9 @@ void loop() {
         }
       }
       
-      if(e.type == NOTEOFF) {
-        if(e.m1 == 0x80 + MIDI_CHANNEL){
-          removeNote(e.m2);
-        }
+      if((e.type == NOTEOFF && e.m1 == 0x80 + MIDI_CHANNEL) 
+        || (e.type == NOTEON && e.m1 == 0x90 + MIDI_CHANNEL && e.m3 == 0 )) {
+        removeNote(e.m2);
       }
       
       // set glide if portamento CC has moved
