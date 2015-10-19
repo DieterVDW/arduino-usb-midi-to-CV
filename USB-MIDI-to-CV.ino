@@ -49,7 +49,7 @@ const byte PB = 0x0E;
 // start of variables that you are likely to want to change
 //////////////////////////////////////////////////////////////
 byte MIDI_CHANNEL = 0; // Initial MIDI channel (0=1, 1=2, etc...), can be adjusted with notes 12-23
-float modStep=0.4;     // amount to modulate, simulates LFO->pitch
+float modStep=0.6;     // amount to modulate, simulates LFO->pitch
 int oscAdjust=105;     // adjust up/down if octaves are not exactly 12 semitones apart, can be adjusted with notes 85 and 87
 int BEND_RANGE = 53;
 //////////////////////////////////////////////////////////////
