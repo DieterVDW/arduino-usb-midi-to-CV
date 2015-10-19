@@ -205,13 +205,14 @@ void setup() {
   pinMode( TRIGGER_PIN, OUTPUT ); // set light pin to output mode
   analogWrite( TRIGGER_PIN, 0);
   analogWrite( NOTE_PIN1, 0 );
+  bitSet(TCCR3B, WGM32);   // <---- Switch the PWM mode used by Arduino.
 }
 
 void playNote(byte noteVal, float myMod){
   analogVal = map(noteVal, MIN_NOTE, MAX_NOTE, 0, 2550+oscAdjust)/10;
   if (analogVal > 255) analogVal=255;
   if (myMod != 0){
-    analogVal=int(1.0*analogVal+(1.0*myMod*(mod/127)/40));
+    analogVal=int(1.0*analogVal+(1.0*myMod*(mod/127.0)/40));
   }
   
   // see if this note needs pitch bend
