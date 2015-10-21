@@ -269,6 +269,7 @@ void removeNote(byte note){
     analogWrite(NOTE_PIN1, 0);
     notePointer=0;
     currentNote=0;
+		noteNeeded=0;
     
     // turn light off
     analogWrite(TRIGGER_PIN, 0);
